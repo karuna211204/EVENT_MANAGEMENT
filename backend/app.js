@@ -10,8 +10,8 @@ dotenv.config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ["POST"],
+    origin: process.env.FRONTEND_URL,  // Ensure this matches your front-end URL
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  // Allow necessary methods
     credentials: true,
   })
 );
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/message", messageRouter);
+console.log("Allowed frontend URL:", process.env.FRONTEND_URL);
 
 dbConnection();
 
